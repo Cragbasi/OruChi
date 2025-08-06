@@ -6,8 +6,8 @@ import { HashRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter basename="/news_explorer">
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
