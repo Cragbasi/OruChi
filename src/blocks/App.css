@@ -1,0 +1,63 @@
+@font-face {
+  src: url("../vendor/roboto-slab-700.woff") format("woff");
+  font-family: "RobotoSlab700";
+}
+@font-face {
+  src: url("../vendor/roboto-slab-400-regular.woff") format("woff");
+  font-family: "RobotoSlab400";
+}
+@font-face {
+  src: url("../vendor/roboto-500.woff") format("woff");
+  font-family: "Roboto500";
+}
+@font-face {
+  src: url("../vendor/roboto-400-regular.woff") format("woff");
+  font-family: "Roboto400";
+}
+@font-face {
+  src: url("../vendor/roboto-900.woff") format("woff");
+  font-family: "Roboto900";
+}
+@font-face {
+  src: url("../vendor/inter-400-regular.woff") format("woff");
+  font-family: "Inter400";
+}
+@font-face {
+  font-family: "SourceSansPro";
+  src: url("../vendor/SourceSansPro-Regular.otf") format("opentype");
+  font-weight: 400;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page {
+  margin: 0 auto;
+
+  font-family: "Inter400", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  width: 1440px;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 320px) {
+  .page {
+    width: 320px;
+  }
+
+  html {
+    width: 320px;
+    margin: 0;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  .page {
+    width: 768px;
+  }
+}
