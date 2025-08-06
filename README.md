@@ -83,5 +83,5 @@ src/
 ## Links
 
 - Live Demo: Coming soon
-- Frontend Repo: https://github.com/cragbasi/news-explorer
+- Frontend Deployment: https://cragbasi.github.io/news_explorer/
 - API Documentation: NewsAPI.org
