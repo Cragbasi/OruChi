@@ -29,7 +29,6 @@ function MobileMenu({
     };
 
     document.addEventListener("keydown", handleEscClose);
-
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
@@ -42,42 +41,49 @@ function MobileMenu({
           className="mobile-menu mobile-menu_opened"
           onClick={handleOverlayClick}
         >
-          <div className="mobile-menu__container">
-            {" "}
-            {
-              <button
-                type="button"
-                className="mobile-menu__home-button"
-                onClick={() => {
-                  if (activeTab === "home" && isLoggedIn) {
-                    setActiveTab("saved");
-                    onViewSavedArticles(); // or navigate to home
-                    onClose();
-                  } else {
-                    setActiveTab("home");
-                    onViewHome(); // or navigate to saved articles
-                    onClose();
-                  }
-                }}
-              >
-                {activeTab === "saved"
-                  ? "Home"
-                  : activeTab === "home" && isLoggedIn
-                  ? "Saved articles"
-                  : "Home"}
-              </button>
-            }
-            <button
-              type="button"
-              className="mobile-menu__sign-in-button"
-              onClick={isLoggedIn ? handleSignOut : onOpenLoginModal}
-            >
-              {isLoggedIn ? "Log out" : "Sign in"}
-            </button>
-          </div>
+          <nav
+            className="mobile-menu__container"
+            aria-label="Mobile navigation menu"
+          >
+            <ul className="mobile-menu__list">
+              <li className="mobile-menu__item">
+                <button
+                  type="button"
+                  className="mobile-menu__home-button"
+                  onClick={() => {
+                    if (activeTab === "home" && isLoggedIn) {
+                      setActiveTab("saved");
+                      onViewSavedArticles();
+                      onClose();
+                    } else {
+                      setActiveTab("home");
+                      onViewHome();
+                      onClose();
+                    }
+                  }}
+                >
+                  {activeTab === "saved"
+                    ? "Home"
+                    : activeTab === "home" && isLoggedIn
+                    ? "Saved articles"
+                    : "Home"}
+                </button>
+              </li>
+              <li className="mobile-menu__item">
+                <button
+                  type="button"
+                  className="mobile-menu__sign-in-button"
+                  onClick={isLoggedIn ? handleSignOut : onOpenLoginModal}
+                >
+                  {isLoggedIn ? "Log out" : "Sign in"}
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
       )}
     </>
   );
 }
+
 export default MobileMenu;

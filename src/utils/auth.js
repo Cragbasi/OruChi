@@ -1,3 +1,4 @@
+import { fakeEmails } from "../utils/constants.js";
 // Return fake from the database, etc. Just return a promise that resolves to what your backend would send back.
 
 export const authorize = (email, password) => {
@@ -15,3 +16,15 @@ export const checkToken = (token) => {
     });
   });
 };
+
+export function onSignUp({ name, email, password }) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (fakeEmails.includes(email.toLowerCase())) {
+        resolve({ success: false, error: "EMAIL_TAKEN" });
+      } else {
+        resolve({ success: true });
+      }
+    }, 500);
+  });
+}

@@ -10,7 +10,7 @@
 
 .footer__credit {
   margin: 0;
-  font-family: "Roboto400";
+  font-family: "Roboto400", sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
@@ -24,15 +24,30 @@
 .footer__nav-container {
   display: flex;
   flex-direction: row;
+}
+.footer__nav-list {
+  display: flex;
+  flex-direction: row;
   gap: 40px;
 }
+.footer__nav-item {
+  display: flex;
+  flex-direction: row;
+}
+
 .footer__social-container {
+  display: flex;
+  flex-direction: row;
+}
+.footer__social-list {
   display: flex;
   flex-direction: row;
   gap: 24px;
 }
+.footer__social-item {
+}
 .footer__button {
-  font-family: "Roboto400";
+  font-family: "Roboto400", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -64,6 +79,9 @@
     justify-content: space-between;
     width: 320px;
     padding: 0 16px;
+  }
+  .footer__nav-list {
+    flex-direction: column;
   }
 }
 

@@ -12,10 +12,6 @@
   z-index: 1;
 }
 
-a {
-  text-decoration: none;
-}
-
 .header__logo {
   font-family: "RobotoSlab700", sans-serif;
   font-weight: 700;
@@ -37,7 +33,12 @@ a {
   align-items: center;
   justify-content: center;
 }
-
+.header__nav-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 .header__home-button {
   margin: 0;
   padding: 0;

@@ -5,19 +5,20 @@ import { useNavigate } from "react-router-dom";
 import "../blocks/App.css";
 import { fetchNews } from "../utils/NewsApi.js";
 import { setToken, getToken } from "../utils/token.js";
-import { apiKey } from "../utils/constants.js";
+
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import MobileMenu from "./MobileMenu.jsx";
 import RegisterModal from "./RegisterModal.jsx";
+import IsRegisteredModal from "./IsRegisteredModal.jsx";
 import Profile from "./Profile.jsx";
 import LoginModal from "./LoginModal.jsx";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext.jsx";
-import { authorize, checkToken } from "../utils/auth.js";
-import { saveArticle, getItems } from "../utils/api.js";
-import fallback from "../assets/SearchForm.svg";
+import { authorize, checkToken, onSignUp } from "../utils/auth.js";
+import { saveArticle } from "../utils/api.js";
+import fallback from "../assets/SearchForm.png";
 
 const BASE_URL = "https://newsapi.org/v2/everything";
 function invokeFetchNews({
@@ -70,14 +71,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [newsArticles, setNewsArticles] = useState([]);
   const [currentUser, setCurrentUser] = useState({
-    avatar: "",
+    password: "",
     email: "",
     name: "",
-    __v: "",
-    _id: "",
   });
   const [savedArticles, setSavedArticles] = useState([]);
   const [savedStatus, setSavedStatus] = useState({});
@@ -86,6 +87,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [serverError, setServerError] = useState("");
 
   const navigate = useNavigate();
 
@@ -109,6 +112,17 @@ function App() {
   };
   const handleMobileMenuClose = () => {
     setIsMobileMenuOpen(false);
+  };
+
+  const handOpenIsRegistered = () => {
+    setIsRegistered(true);
+  };
+  const handleCloseIsRegistered = () => {
+    setIsRegistered(false);
+  };
+  const handleLogInWithIsRegistered = () => {
+    handleLogIn(currentUser.email, currentUser.password);
+    handleCloseIsRegistered();
   };
 
   // Call NewsApi with search request
@@ -169,9 +183,22 @@ function App() {
   }
 
   const handleSignUp = (item) => {
-    const { email, password } = item;
-    handleLogIn({ email, password });
-    handleCloseSignUpModal();
+    const { email, password, name } = item;
+
+    onSignUp({ email, password, name })
+      .then((res) => {
+        if (res.success) {
+          setCurrentUser({ email, password, name });
+          handleCloseSignUpModal();
+          handOpenIsRegistered();
+        } else if (res.error === "EMAIL_TAKEN") {
+          setServerError("This email is not available");
+        }
+      })
+      .catch((err) => {
+        console.error("Signup error:", err);
+        setServerError("Something went wrong. Please try again.");
+      });
   };
 
   const handleSignOut = () => {
@@ -179,17 +206,11 @@ function App() {
     setIsLoggedIn(false);
     setActiveTab("home");
     setCurrentUser({
-      avatar: "",
+      password: "",
       email: "",
       name: "",
-      __v: "",
-      _id: "",
     });
   };
-
-  // useEffect(() => {
-  //   getItems().then((items) => setSavedArticles(items));
-  // }, []);
 
   function handleSaveArticle(article) {
     console.log("Saving article:", article);
@@ -205,10 +226,6 @@ function App() {
       console.log("saved article:", saved);
     });
   }
-
-  useEffect(() => {
-    console.log("savedArticles after save:", savedArticles);
-  }, [savedArticles]);
 
   function handleRemoveArticle(article) {
     const { title } = article;
@@ -247,19 +264,31 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (isSignUpModalOpen || isLoginModalOpen) {
+      setServerError("");
+      setEmailError("");
+    }
+  }, [isSignUpModalOpen, isLoginModalOpen]);
+
+  useEffect(() => {
+    console.log("savedArticles after save:", savedArticles);
+  }, [savedArticles]);
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header
           isLoggedIn={isLoggedIn}
           handleMobileMenuOpen={handleMobileMenuOpen}
-          onOpenSignUpModal={handleOpenSignUpModal}
+          onOpenLoginModal={handleOpenisLoginModal}
           handleSignOut={handleSignOut}
           onViewSavedArticles={handleViewSavedArticles}
           setActiveTab={setActiveTab}
           activeTab={activeTab}
           isMobileMenuOpen={isMobileMenuOpen}
           onClose={handleMobileMenuClose}
+          isLoginModalOpen={isLoginModalOpen}
+          isSignUpModalOpen={isSignUpModalOpen}
         />
 
         <Routes>
@@ -302,7 +331,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           onClose={handleMobileMenuClose}
           onOpenLoginModal={() => {
-            handleOpenSignUpModal();
+            handleOpenisLoginModal();
             handleMobileMenuClose();
           }}
           handleSignOut={() => {
@@ -318,10 +347,21 @@ function App() {
         {isSignUpModalOpen && (
           <RegisterModal
             onClose={handleCloseSignUpModal}
-            // isOpen={isSignUpModalOpen}
             onSignUp={handleSignUp}
             onOpenLoginModal={handleOpenisLoginModal}
+            openIsRegisteredModal={handOpenIsRegistered}
+            setEmailError={setEmailError}
+            setServerError={setServerError}
+            emailError={emailError}
+            serverError={serverError}
           ></RegisterModal>
+        )}
+        {isRegistered && (
+          <IsRegisteredModal
+            onClose={handleCloseIsRegistered}
+            isOpen={isRegistered}
+            handleSignIn={handleLogInWithIsRegistered}
+          ></IsRegisteredModal>
         )}
         {isLoginModalOpen && (
           <LoginModal
@@ -329,6 +369,8 @@ function App() {
             isOpen={isLoginModalOpen}
             onLogIn={handleLogIn}
             onOpenSignUpModal={handleOpenSignUpModal}
+            setEmailError={setEmailError}
+            emailError={emailError}
           ></LoginModal>
         )}
       </div>

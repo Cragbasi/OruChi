@@ -2,7 +2,16 @@ import { useEffect, useState } from "react";
 import "../blocks/ModalWithForm.css";
 import ModalWithForm from "./ModalWithForm.jsx";
 
-const RegisterModal = ({ isOpen, onSignUp, onClose, onOpenLoginModal }) => {
+const RegisterModal = ({
+  isOpen,
+  onSignUp,
+  onClose,
+  onOpenLoginModal,
+  setEmailError,
+  emailError,
+  serverError,
+  setServerError,
+}) => {
   // declare state for each input field
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +33,18 @@ const RegisterModal = ({ isOpen, onSignUp, onClose, onOpenLoginModal }) => {
     setName(e.target.value);
   };
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    let value = e.target.value;
+    setEmail(value);
+    value = "";
+    // Clear server error on edit
+    if (serverError) setServerError("");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -38,7 +58,7 @@ const RegisterModal = ({ isOpen, onSignUp, onClose, onOpenLoginModal }) => {
     console.log(name, email, password);
     onSignUp(submittedData);
   }
-
+  const isFormValid = email.trim() !== "" && password.trim() !== "";
   return (
     <>
       <ModalWithForm
@@ -47,7 +67,13 @@ const RegisterModal = ({ isOpen, onSignUp, onClose, onOpenLoginModal }) => {
         onClose={onClose}
         isOpen={isOpen}
         buttonText="Sign up"
-        onSubmit={handleSubmit}
+        buttonClass="modal__button-save"
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+        serverError={serverError}
+        emailError={emailError}
+        isSubmitDisabled={!isFormValid}
       >
         <label htmlFor="email" className="modal__input-label">
           {" "}
@@ -56,7 +82,9 @@ const RegisterModal = ({ isOpen, onSignUp, onClose, onOpenLoginModal }) => {
         <input
           type="email"
           id="email"
-          className="modal__input"
+          className={`modal__input ${
+            emailError ? "modal__input_email-error" : ""
+          }`}
           placeholder="Enter email"
           required
           minLength="2"
@@ -64,7 +92,10 @@ const RegisterModal = ({ isOpen, onSignUp, onClose, onOpenLoginModal }) => {
           name="email"
           value={email}
           onChange={handleEmailChange}
+          autoComplete="email"
         />
+        {emailError && <span className="modal__error">{emailError}</span>}
+
         <label htmlFor="password" className="modal__input-label">
           Password
         </label>
@@ -85,7 +116,9 @@ const RegisterModal = ({ isOpen, onSignUp, onClose, onOpenLoginModal }) => {
         <input
           type="text"
           id="name"
-          className="modal__input"
+          className={`modal__input  ${
+            serverError ? "modal__input_email-taken" : ""
+          }`}
           placeholder="Enter your username"
           required
           minLength="2"

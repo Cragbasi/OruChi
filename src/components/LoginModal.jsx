@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import "../blocks/ModalWithForm.css";
 import ModalWithForm from "./ModalWithForm.jsx";
 
-const LoginModal = ({ isOpen, onLogIn, onClose, onOpenSignUpModal }) => {
+const LoginModal = ({
+  isOpen,
+  onLogIn,
+  onClose,
+  onOpenSignUpModal,
+  emailError,
+  setEmailError,
+}) => {
   // declare state for each input field
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,11 +23,19 @@ const LoginModal = ({ isOpen, onLogIn, onClose, onOpenSignUpModal }) => {
     // Reset input fields and clean up the event listener
     setEmail("");
     setPassword("");
-  }, [isOpen, onClose]); // watch isOpen to add the listeners only when the modal is open
+  }, [isOpen]); // watch isOpen to add the listeners only when the modal is open
 
   // create onChange handlers corresponding to each state variable
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    let value = e.target.value;
+    setEmail(value);
+    value = "";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -45,6 +60,7 @@ const LoginModal = ({ isOpen, onLogIn, onClose, onOpenSignUpModal }) => {
         onClose={onClose}
         isOpen={isOpen}
         buttonText="Log In"
+        buttonClass="modal__button-save"
         onSubmit={handleSubmit}
         isSubmitDisabled={!isFormValid}
       >
@@ -55,7 +71,9 @@ const LoginModal = ({ isOpen, onLogIn, onClose, onOpenSignUpModal }) => {
         <input
           type="email"
           id="email"
-          className="modal__input"
+          className={`modal__input ${
+            emailError ? "modal__input_email-error" : ""
+          }`}
           placeholder="Enter email"
           required
           minLength="2"
@@ -63,7 +81,9 @@ const LoginModal = ({ isOpen, onLogIn, onClose, onOpenSignUpModal }) => {
           name="email"
           value={email}
           onChange={handleEmailChange}
+          autoComplete="email"
         />
+        {emailError && <span className="modal__error">{emailError}</span>}
         <label htmlFor="password" className="modal__input-label">
           Pasword
         </label>

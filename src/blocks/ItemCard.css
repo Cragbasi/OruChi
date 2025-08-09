@@ -9,7 +9,7 @@
 .item-card__image {
   width: 400px;
   height: 272px;
-
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -21,7 +21,7 @@
 
 .item-card__date {
   margin-bottom: 15px;
-  font-family: "SourceSansPro";
+  font-family: "SourceSansPro", sans-serif;
   font-size: 18px;
   line-height: 24px;
   letter-spacing: 0px;
@@ -30,7 +30,7 @@
 }
 .item-card__title {
   margin-bottom: 16px;
-  font-family: "RobotoSlab400";
+  font-family: "RobotoSlab400", sans-serif;
   font-weight: 400;
   font-size: 26px;
   line-height: 30px;
@@ -44,7 +44,7 @@
 }
 
 .item-card__description {
-  font-family: "Roboto400";
+  font-family: "Roboto400", sans-serif;
 
   font-size: 16px;
 
@@ -58,7 +58,7 @@
   overflow: hidden;
 }
 .item-card__source {
-  font-family: "RobotoSlab700";
+  font-family: "RobotoSlab700", sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
@@ -97,7 +97,7 @@
   background-image: url("../assets/trash2.svg");
 }
 .item-card__keyword {
-  font-family: "Roboto500";
+  font-family: "Roboto500", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
@@ -122,7 +122,7 @@
   top: 24px;
   left: 149px;
   border-radius: 10px;
-  font-family: "Roboto500";
+  font-family: "Roboto500", sans-serif;
   font-weight: 500;
   font-size: 12px;
   line-height: 100%;
@@ -131,7 +131,7 @@
   align-items: center;
   justify-content: center;
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
   .item-card {
     width: 288px;
   }
@@ -167,9 +167,14 @@
     top: 16px;
     left: 50px;
   }
+
+  .item-card__keyword {
+    top: 16px;
+    left: 16px;
+  }
 }
 
-@media screen and (min-width: 321px) and (max-width: 768px) {
+@media screen and (min-width: 501px) and (max-width: 768px) {
   .item-card {
     width: 224px;
   }
@@ -211,5 +216,9 @@
   .item-card__signin-message {
     top: 8px;
     left: 10px;
+  }
+  .item-card__keyword {
+    top: 8px;
+    left: 8px;
   }
 }

@@ -1,5 +1,5 @@
 import "../blocks/About.css";
-import avatar from "../assets/avatar.svg";
+import avatar from "../assets/Avatar.png";
 
 function About() {
   return (

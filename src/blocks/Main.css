@@ -20,7 +20,7 @@
 
 .item-cards__title {
   margin-bottom: 64px;
-  font-family: "RobotoSlab400";
+  font-family: "RobotoSlab400", sans-serif;
   font-weight: 400;
   font-size: 40px;
   line-height: 46px;
@@ -113,5 +113,13 @@
   .item-cards__show-more-button {
     height: 56px;
     margin-top: 32px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 500px) {
+  .item-cards__container {
+    max-width: 768px;
+    grid-template-columns: repeat(2, 288px);
+    gap: 8px;
   }
 }

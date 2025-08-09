@@ -5,7 +5,7 @@
 }
 
 .search-form__container {
-  background-image: url("../assets/SearchForm.svg");
+  background-image: url("../assets/SearchForm.png");
   background-repeat: no-repeat;
   background-size: contain;
   position: relative;
@@ -90,7 +90,7 @@
     width: 320px;
   }
   .search-form__container {
-    background-image: url("../assets/SearchFormPhone.svg");
+    background-image: url("../assets/SearchFormPhone.png");
     top: -72px;
     min-height: 536px;
     width: 320px;
@@ -139,7 +139,7 @@
   }
 
   .search-form__container {
-    background-image: url("../assets/SearchForm2.svg");
+    background-image: url("../assets/SearchForm2.png");
     max-width: 768px;
     height: 400px;
     top: -66px;

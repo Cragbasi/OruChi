@@ -27,7 +27,13 @@
   opacity: 1;
   transition: opacity 1s ease-out;
 }
+
 .modal_type_log-in {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+.modal_type_registered {
   visibility: visible;
   opacity: 1;
   transition: opacity 1s ease-out;
@@ -47,11 +53,11 @@
 }
 .modal__header {
   margin: 0;
-  padding-bottom: 22px;
 }
 .modal__title {
   margin: 0;
-  font-family: "Roboto900";
+
+  font-family: "Roboto900", sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
@@ -66,9 +72,32 @@
   border-radius: 0;
   opacity: 20%;
 }
+.modal__input_email-taken {
+  margin: 0 0 17px;
+}
 
 .modal__input:not(:placeholder-shown) {
   opacity: 100%;
+}
+.modal__input_email-error {
+  margin: 0;
+}
+.modal__error {
+  font-family: "Inter400", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: #ff0000;
+  margin: 3px 0 13px;
+}
+.modal__email-unavailable-error {
+  font-family: "Inter400", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: #ff0000;
+  margin: 3px 0 0;
+  text-align: center;
 }
 .modal__input-label {
   font-size: 12px;
@@ -77,13 +106,15 @@
   margin-bottom: 9px;
   opacity: 100%;
 }
-
+.modal__input-label:first-of-type {
+  padding-top: 22px;
+}
 .modal__button-save {
   margin: 8px 0 64px 0;
   padding: 0;
 
   font-family: "Roboto500", sans-serif;
-  color: #b6bcbf;
+  color: #ffffff;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -93,14 +124,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #e6e8eb;
+  background-color: #2f71e5;
   border: 1px solid #ffffff;
   border-radius: 50px / 50px;
 }
 
 .modal__button-save_log-in {
   margin: 0;
-  font-family: "Inter400";
+  font-family: "Inter400", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
@@ -110,6 +141,22 @@
   color: #2f71e5;
   position: absolute;
   bottom: 28px;
+}
+
+.modal__button_registered-log-in {
+  margin: 14px 0 51px;
+  font-family: "Inter400", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  height: 20px;
+  background-color: transparent;
+  border: none;
+  color: #2f71e5;
+  text-align: start;
+}
+.modal__button-save_none {
+  display: none;
 }
 .modal__button-save_span {
   color: #000000;
@@ -124,9 +171,8 @@
   cursor: pointer;
 }
 .modal__button-save:disabled {
-  cursor: default;
-  background: #212121;
-  opacity: 50%;
+  background: #e6e8eb;
+  color: #b6bcbf;
 }
 
 .modal__button-close {
@@ -175,6 +221,7 @@
     position: absolute;
     bottom: 128px;
   }
+
   .modal__button-close {
     background-image: url("../assets/mobile-close.svg");
     top: -40px;

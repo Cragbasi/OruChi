@@ -4,7 +4,7 @@ import "../blocks/Header.css";
 
 function Header({
   isLoggedIn,
-  onOpenSignUpModal,
+  onOpenLoginModal,
   handleSignOut,
   onViewSavedArticles,
   setActiveTab,
@@ -12,6 +12,8 @@ function Header({
   handleMobileMenuOpen,
   isMobileMenuOpen,
   onClose,
+  isLoginModalOpen,
+  isSignUpModalOpen,
 }) {
   return (
     <div className="header">
@@ -33,9 +35,7 @@ function Header({
       </div>
       <Navigation
         isLoggedIn={isLoggedIn}
-        onOpenAddItemModal
-        onOpenLoginModal
-        onOpenSignUpModal={onOpenSignUpModal}
+        onOpenLoginModal={onOpenLoginModal}
         handleSignOut={handleSignOut}
         onViewSavedArticles={onViewSavedArticles}
         setActiveTab={setActiveTab}
@@ -43,6 +43,8 @@ function Header({
         isMobileMenuOpen={isMobileMenuOpen}
         handleMobileMenuOpen={handleMobileMenuOpen}
         onClose={onClose}
+        isLoginModalOpen={isLoginModalOpen}
+        isSignUpModalOpen={isSignUpModalOpen}
       />
     </div>
   );

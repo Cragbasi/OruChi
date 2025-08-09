@@ -1,5 +1,5 @@
 import "../blocks/ItemCard.css";
-import searchForm from "../assets/SearchForm2.svg";
+import searchForm from "../assets/SearchForm2.png";
 import { useState, useEffect } from "react";
 
 const ItemCard = ({

@@ -9,6 +9,8 @@ function ModalWithForm({
   children,
   onSubmit,
   isSubmitDisabled,
+  buttonClass,
+  serverError,
 }) {
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -45,9 +47,15 @@ function ModalWithForm({
         ></button>
         <form onSubmit={onSubmit} name={name} id={name} className="modal__form">
           {children}
+          {serverError && (
+            <span className="modal__email-unavailable-error">
+              {serverError}
+            </span>
+          )}
+
           <button
             type="submit"
-            className="modal__button-save modal__button-save_disabled"
+            className={buttonClass}
             disabled={isSubmitDisabled}
           >
             {buttonText}
