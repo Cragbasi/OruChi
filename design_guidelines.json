@@ -1,0 +1,118 @@
+{
+  "identity": {
+    "name": "Chi's Fixerupper",
+    "persona": "The Engineer Craftsman",
+    "vibe": "Reliable, Precise, Warm, Neighborly",
+    "emotional_tone": "Trust, Competence, Approachability",
+    "target_audience": "Homeowners, Neighbors, Busy Professionals"
+  },
+  "typography": {
+    "primary_font": "Bitter",
+    "secondary_font": "Inter",
+    "font_weights": {
+      "light": 300,
+      "regular": 400,
+      "bold": 700,
+      "black": 900
+    },
+    "usage": {
+      "headings": "Bitter (Slab Serif) - conveys durability and craftsmanship",
+      "body": "Inter (Sans Serif) - ensures high legibility for service details"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": "#2F4F4F",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#8B4513",
+      "secondary_foreground": "#FFFFFF",
+      "accent": "#DAA520",
+      "accent_foreground": "#000000",
+      "background": "#FAF9F6",
+      "foreground": "#1A1A1A",
+      "muted": "#E5E5E5",
+      "muted_foreground": "#737373",
+      "card": "#FFFFFF",
+      "card_foreground": "#1A1A1A",
+      "border": "#D4D4D4"
+    },
+    "semantic": {
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#3B82F6"
+    },
+    "instructions": "Override the CSS variables in index.css with these HSL values or Hex codes. Use the 'Off-White' background (#FAF9F6) to avoid a sterile clinical look."
+  },
+  "layout_strategy": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "spacing": {
+      "section_gap": "py-24",
+      "element_gap": "gap-8"
+    },
+    "grid_system": "Bento Grid (Mode A) for Services - Mix tall and wide cards to avoid visual monotony.",
+    "hero_section": "Split Screen: Left side text/CTA, Right side 'Chi' portrait with 'Certified Engineer' badge overlay.",
+    "gallery_section": "Before/After Slider - Use a draggable slider to reveal the transformation."
+  },
+  "components": {
+    "buttons": {
+      "style": "pill",
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/90",
+      "outline": "border-2 border-primary text-primary hover:bg-primary/10"
+    },
+    "cards": {
+      "style": "rounded-xl border border-border/40 bg-card shadow-sm hover:shadow-md transition-all duration-300",
+      "service_card": "Must include an icon, title, and short description. Use 'group' hover effects."
+    },
+    "inputs": {
+      "style": "rounded-md border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    },
+    "navigation": {
+      "style": "Sticky header with glassmorphism (backdrop-blur-md bg-background/80). Logo on left, Links center, CTA right."
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Use subtle wood grain or blueprint patterns in the background of the Hero or Footer to emphasize the 'Engineer/Craftsman' theme.",
+    "icons": "Use 'lucide-react' for all UI icons. Use 'Hammer', 'Wrench', 'Ruler', 'Paintbrush' for services.",
+    "animations": "Use 'framer-motion' for entrance animations. Stagger children in the Services grid."
+  },
+  "image_urls": {
+    "hero": {
+      "chi_portrait": "https://images.unsplash.com/photo-1461938337379-4b537cd2db74",
+      "background_texture": "https://images.unsplash.com/photo-1497218770144-3fea6dbc33fe"
+    },
+    "services": {
+      "carpentry": "https://images.unsplash.com/photo-1602629726749-61bfe80aadca",
+      "plumbing": "https://images.unsplash.com/photo-1647481837638-ebf6d2a060ce",
+      "painting": "https://images.unsplash.com/photo-1616697412153-7ad8ac8aa5d9"
+    },
+    "gallery": {
+      "kitchen_before": "https://images.unsplash.com/photo-1728163807511-5cac5ea7d909",
+      "kitchen_after": "https://images.unsplash.com/photo-1721522000055-795cf74e9856",
+      "wall_before": "https://images.unsplash.com/photo-1694246766144-e197c6965358",
+      "wall_after": "https://images.unsplash.com/photo-1616697412153-7ad8ac8aa5d9"
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL DEPENDENCIES: npm install lucide-react framer-motion clsx tailwind-merge",
+    "2. THEME SETUP: Update 'tailwind.config.js' to include the custom colors and fonts. Add '@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@300;400;700&family=Inter:wght@300;400;600&display=swap');' to index.css.",
+    "3. HERO SECTION: Build a split-screen hero. Left: 'Hi, I'm Chi...' text. Right: The portrait image. Use the 'background_texture' as a subtle overlay or section background.",
+    "4. SERVICES GRID: Create a Bento Grid. Don't just list services. Make 'Plumbing' and 'Carpentry' feature cards (larger).",
+    "5. GALLERY: Implement a 'Before/After' comparison. If a slider library isn't available, use a simple side-by-side grid with 'Before' and 'After' labels.",
+    "6. CONTACT FORM: Use Shadcn 'Form', 'Input', 'Textarea'. Style it to look like a clipboard or a work order form.",
+    "7. FOOTER: Dark background (Primary Color). Include 'Certified Mechanical Engineer' badge/text.",
+    "8. ACCESSIBILITY: Ensure text contrast on the Earthy Green background is sufficient (use white text).",
+    "9. DATA-TESTID: Add 'data-testid' to all interactive elements (buttons, inputs, links)."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use generic centered layouts.",
+    "Create depth through layered design elements.",
+    "Use glass-morphism effects for the header.",
+    "Every interaction needs micro-animations.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Prioritize using pre-existing components from src/components/ui.",
+    "Components MUST use named exports.",
+    "Pages MUST use default exports."
+  ]
+}
