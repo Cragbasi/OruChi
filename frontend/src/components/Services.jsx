@@ -85,6 +85,24 @@ export const Services = () => {
       description: 'Complete room renovations and home improvement projects',
       featured: true 
     },
+    { 
+      icon: Bath, 
+      title: 'Bathroom Remodeling', 
+      description: 'Full bathroom renovations, tile work, vanities, and fixture upgrades',
+      featured: true 
+    },
+    { 
+      icon: ChefHat, 
+      title: 'Kitchen Remodeling', 
+      description: 'Kitchen makeovers, countertops, backsplash, and appliance installation',
+      featured: true 
+    },
+    { 
+      icon: TreePine, 
+      title: 'Patio & Outdoor', 
+      description: 'Patio construction, repairs, outdoor living spaces, and deck work',
+      featured: false 
+    },
   ];
 
   const containerVariants = {
