@@ -10,7 +10,10 @@ import {
   Thermometer,
   LayoutGrid,
   Package,
-  Hammer
+  Hammer,
+  Bath,
+  ChefHat,
+  TreePine
 } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 
